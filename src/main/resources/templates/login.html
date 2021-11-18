@@ -21,6 +21,11 @@
       }
       .container{
         color: #000;
+        margin-top: 30px;
+      }
+      .form-control {
+        padding: 12px;
+        height: 50px;
       }
       ul li {
         list-style: none;
@@ -40,18 +45,35 @@
         background-color: #000;
 
       }
-      
+
+      .spring-btn-black {
+        cursor: pointer;
+      }
       html, body{
-	height: 100%;
-	font-family: 'Lato', sans-serif;
-	font-family: 'Open Sans', sans-serif;
-	font-family: 'Abel', sans-serif;
-}
+        overflow: hidden;
+	    height: 100%;
+	    font-family: 'Lato', sans-serif;
+	    font-family: 'Open Sans', sans-serif;
+	    font-family: 'Abel', sans-serif;
+      }
+
+      .more-info {
+        height: 115px;
+        padding: 10px 150px;
+        background-color: yellow;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .more-info__content-left {
+        margin-right: 150px;
+        font-size: 25px;
+        width: 180px;
+        font-weight: bold;
+      }
   </style>
    <body>
-      
       <th:block th:include="/_menu"></th:block>
-      
       <div class="container">
         <div class="row">
             <div class="col-lg-6 col-sm-8 col-xs-12">
@@ -83,40 +105,32 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                   </div>
-                  <button type="submit" class="spring-btn-black">LOG IN <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></button>
+                    By clicking 'Log In' you agree to our website <a href="">Creators Club Terms & Conditions </a>,  <a href="">Spring Privacy Notice</a> and  <a href="">Terms & Conditions</a>.
+                    <br> <br>
+                    <button type="submit" class="spring-btn-black">LOG IN <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></button>
 				
                 </form>
                 
                 <span class="error-message" th:utext="${error}"></span>
 
-                <br><br>
-
-                By clicking 'Log In' you agree to our website <a href="">Creators Club Terms & Conditions </a>,  <a href="">Spring Privacy Notice</a> and  <a href="">Terms & Conditions</a>.
-
                <!--  ----------- form end -------------- -->
 
 
                </section>
-                <div style="text-align:left">
-          <h3>User/Password:</h3>
-          <ul>        
-             <li>employee1/123</li>
-             <li>manager1/123</li>   
-          </ul>
             </div>
-            </div>
-            
             <div class="col-lg-6 col-sm-4 col-xs-12">
                 
                 <h1>JOIN THE CLUB. GET REWARDED.</h1>
-                    Join the adidas Creators Club membership program:
+                Creating an account is easy. Enter your email address and fill in the form on the next page and enjoy the benefits of having an account.
                   <ul >
-                      <li ><i class="fas fa-check"></i> Get immediate access to all Challenger level rewards</li>
-                      <li><i class="fas fa-check"></i> Earn access to shop limited edition products</li>
-                      <li ><i class="fas fa-check"></i> Level up for exclusive access to sport, yoga and music events</li>
-                      <li ><i class="fas fa-check"></i> Receive our best special offers and promotions</li>
-                     
-                    </ul>  
+                      <li ><i class="fas fa-check"></i> Simple overview of your personal information</li>
+                      <li><i class="fas fa-check"></i> Faster checkout</li>
+                      <li ><i class="fas fa-check"></i> A single global login to interact with adidas products and services</li>
+                      <li ><i class="fas fa-check"></i> Exclusive offers and promotions</li>
+                      <li ><i class="fas fa-check"></i> Latest products arrivals</li>
+                      <li ><i class="fas fa-check"></i> New season and limited collections</li>
+                      <li ><i class="fas fa-check"></i> Upcoming events</li>
+                    </ul>
 
                     Join now and start earning points to access new levels and rewards. It's time to unlock the best of adidas.
                     <br><br>
@@ -124,20 +138,23 @@
 
                 <br><br>
 
-                <img src="https://www.adidas.com/glass/react/ce0f36d/assets/img/CC2.0_my_account_register.jpg">
+<!--                <img src="https://www.adidas.com/glass/react/ce0f36d/assets/img/CC2.0_my_account_register.jpg">-->
             
                 
             </div>
         </div>
-    </div>
-    
-
+      </div>
+      <div class="row more-info">
+          <div class="more-info__content-left">
+              SIGN UP & GET AN EXCLUSIVE OFFER
+          </div>
+          <div class="more-info__content-right">
+              <button class="spring-btn-black">
+                  SIGN UP FOR NEW LETTER
+              </button>
+          </div>
+      </div>
         <!-- ------------------------------Login page end---------------------------------- -->
-      
-       
-   
-       
       <th:block th:include="/_footer"></th:block>
-       
    </body>
 </html>
