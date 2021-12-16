@@ -1,12 +1,12 @@
 package com.pbl4.demo.controller;
 
-import com.pbl4.demo.dao.OrderDAO;
-import com.pbl4.demo.dao.ProductDAO;
 import com.pbl4.demo.entity.Product;
 import com.pbl4.demo.form.ProductForm;
 import com.pbl4.demo.model.OrderDetailInfo;
 import com.pbl4.demo.model.OrderInfo;
 import com.pbl4.demo.pagination.PaginationResult;
+import com.pbl4.demo.service.OrderService;
+import com.pbl4.demo.service.ProductService;
 import com.pbl4.demo.validator.ProductFormValidator;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,10 @@ import java.util.List;
 public class AdminController {
  
    @Autowired
-   private OrderDAO orderDAO;
+   private OrderService orderService;
  
    @Autowired
-   private ProductDAO productDAO;
+   private ProductService productService;
  
    @Autowired
    private ProductFormValidator productFormValidator;
@@ -80,7 +80,7 @@ public class AdminController {
       final int MAX_NAVIGATION_PAGE = 10;
  
       PaginationResult<OrderInfo> paginationResult //
-            = orderDAO.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+            = orderService.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
  
       model.addAttribute("paginationResult", paginationResult);
       return "orderList";
@@ -92,7 +92,7 @@ public class AdminController {
       ProductForm productForm = null;
  
       if (code != null && code.length() > 0) {
-         Product product = productDAO.findProduct(code);
+         Product product = productService.findProduct(code);
          if (product != null) {
             productForm = new ProductForm(product);
          }
@@ -116,7 +116,7 @@ public class AdminController {
          return "product";
       }
       try {
-         productDAO.save(productForm);
+         productService.save(productForm);
       } catch (Exception e) {
          Throwable rootCause = ExceptionUtils.getRootCause(e);
          String message = rootCause.getMessage();
@@ -132,12 +132,12 @@ public class AdminController {
    public String orderView(Model model, @RequestParam("orderId") String orderId) {
       OrderInfo orderInfo = null;
       if (orderId != null) {
-         orderInfo = this.orderDAO.getOrderInfo(orderId);
+         orderInfo = this.orderService.getOrderInfo(orderId);
       }
       if (orderInfo == null) {
          return "redirect:/admin/orderList";
       }
-      List<OrderDetailInfo> details = this.orderDAO.listOrderDetailInfos(orderId);
+      List<OrderDetailInfo> details = this.orderService.listOrderDetailInfos(orderId);
       orderInfo.setDetails(details);
  
       model.addAttribute("orderInfo", orderInfo);

@@ -1,7 +1,7 @@
 package com.pbl4.demo.config;
 
 
-import com.pbl4.demo.service.UserDetailsServiceImpl;
+import com.pbl4.demo.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
+		@Autowired
 	   UserDetailsServiceImpl userDetailsService;
 	 
 	   @Bean
