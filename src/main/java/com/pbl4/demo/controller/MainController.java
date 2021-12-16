@@ -1,13 +1,13 @@
 package com.pbl4.demo.controller;
 
-import com.pbl4.demo.dao.OrderDAO;
-import com.pbl4.demo.dao.ProductDAO;
 import com.pbl4.demo.entity.Product;
 import com.pbl4.demo.form.CustomerForm;
 import com.pbl4.demo.model.CartInfo;
 import com.pbl4.demo.model.CustomerInfo;
 import com.pbl4.demo.model.ProductInfo;
 import com.pbl4.demo.pagination.PaginationResult;
+import com.pbl4.demo.service.OrderService;
+import com.pbl4.demo.service.ProductService;
 import com.pbl4.demo.utils.Utils;
 import com.pbl4.demo.validator.CustomerFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +29,10 @@ import java.io.IOException;
 public class MainController {
  
    @Autowired
-   private OrderDAO orderDAO;
+   private OrderService orderService;
  
    @Autowired
-   private ProductDAO productDAO;
+   private ProductService productService;
  
    @Autowired
    private CustomerFormValidator customerFormValidator;
@@ -77,7 +77,7 @@ public class MainController {
       final int maxResult = 8;
       final int maxNavigationPage = 10;
  
-      PaginationResult<ProductInfo> result = productDAO.queryProducts(page, //
+      PaginationResult<ProductInfo> result = productService.queryProducts(page, //
             maxResult, maxNavigationPage, likeName);
  
       model.addAttribute("paginationProducts", result);
@@ -90,7 +90,7 @@ public class MainController {
  
       Product product = null;
       if (code != null && code.length() > 0) {
-         product = productDAO.findProduct(code);
+         product = productService.findProduct(code);
       }
       if (product != null) {
  
@@ -110,7 +110,7 @@ public class MainController {
          @RequestParam(value = "code", defaultValue = "") String code) {
       Product product = null;
       if (code != null && code.length() > 0) {
-         product = productDAO.findProduct(code);
+         product = productService.findProduct(code);
       }
       if (product != null) {
  
@@ -220,7 +220,7 @@ public class MainController {
          return "redirect:/shoppingCartCustomer";
       }
       try {
-         orderDAO.saveOrder(cartInfo);
+         orderService.saveOrder(cartInfo);
       } catch (Exception e) {
  
          return "shoppingCartConfirmation";
@@ -252,7 +252,7 @@ public class MainController {
          @RequestParam("code") String code) throws IOException {
       Product product = null;
       if (code != null) {
-         product = this.productDAO.findProduct(code);
+         product = this.productService.findProduct(code);
       }
       if (product != null && product.getImage() != null) {
          response.setContentType("image/jpeg, image/jpg, image/png, image/gif");

@@ -1,4 +1,4 @@
-package com.pbl4.demo.service;
+package com.pbl4.demo.service.impl;
 
 import com.pbl4.demo.dao.AccountDAO;
 import com.pbl4.demo.entity.Account;
