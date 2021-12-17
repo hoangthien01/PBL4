@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <title>Spring Shop Online</title>
       <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+       <script type="text/javascript" th:src="@{/image.js}"></script>
       <th:block th:include="/_header"></th:block>
    </head>
    <style>
@@ -60,12 +61,12 @@
   
   <div class="form-group">
     <label for="exampleInputPassword1">Image</label>
-    <img th:src="@{|/productImage?code=${productForm.code}|}" width="100"/>
+    <img th:src="@{|/productImage?code=${productForm.code}|}" width="100" id="prev"/>
   </div>
   
   <div class="form-group">
     <label for="exampleFormControlFile1">Upload Image</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1" th:field="*{fileData}">
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" th:field="*{fileData}" onchange="preview(event)">
   </div>
   
   <input type="submit" value="Submit" class="btn btn-primary"/>
@@ -80,6 +81,14 @@
       
        
       <th:block th:include="/_footer"></th:block>
-       
+      <script th:inline="javascript">
+          function preview(event) {
+                if(event.target.files.length > 0){
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("prev");
+                    preview.src = src;
+                }
+            }
+        </script>
    </body>
 </html>
